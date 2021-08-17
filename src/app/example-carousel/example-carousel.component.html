@@ -1,0 +1,18 @@
+<div *ngIf="users.length > 0" class="carousel">
+  <div class="position-relative">
+    <div #carouselTrack class="carousel-track">
+      <div #cards *ngFor="let user of users; let idx = index;" class="card">
+        <div class="name">{{ user.firstName }} {{ user.lastName }}</div>
+        <div class="profession">{{ user.profession }}</div>
+        <div class="city">{{ user.city }}</div>
+      </div>
+
+    </div>
+    <button *ngIf="page > 0" class="carousel-button arrow-left" (click)="showPreviousPage()">&lt;</button>
+    <button *ngIf="page < getPagesCount() - 1" class="carousel-button arrow-right" (click)="showNextPage()">&gt;</button>
+  </div>
+
+  <div class="carousel-nav">
+    <button *ngFor="let user of users | slice:0:getPagesCount(); let idx = index" class="carousel-indicator" [ngClass]="{ 'current-indicator': page === idx }" (click)="setPage(idx)"></button>
+  </div>
+</div>
